@@ -202,28 +202,29 @@ export default function App() {
      ---------------------------------------------------------
      Implement fetch logic inside this useEffect.
      ========================================================= */
- useEffect(() => {
-   const fetchUsers = async () => {
-     setLoading(true);
-     setError(null);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      setError(null);
 
-     try {
-       const res = await fetch("https://jsonplaceholder.typicode.com/users");
-       if (!res.ok) {
-         throw new Error("Failed to fetch users");
-       }
-       const data = await res.json();
-       setUsers(data);
-       setFilteredUsers(data);
-     } catch (err) {
-       setError(err.message);
-     } finally {
-       setLoading(false);
-     }
-   };
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!res.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await res.json();
+        setUsers(data);
+        setFilteredUsers(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-   fetchUsers();
- }, []);
+    fetchUsers();
+  }, []);
+
   /* =========================================================
      TODO 2.2 — FILTER USERS BY NAME
      File: src/App.jsx
@@ -232,25 +233,16 @@ export default function App() {
      Dependency array MUST be: [searchTerm, users]
      ========================================================= */
   useEffect(() => {
-  if (searchTerm === "") {
-    setFilteredUsers(users);
-  } else {
-    const filtered = users.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredUsers(filtered);
-  }
-}, [searchTerm, users]);
-useEffect(() => {
-  if (searchTerm === "") {
-    setFilteredUsers(users);
-  } else {
-    const filtered = users.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    );
-    setFilteredUsers(filtered);
-  }
-}, [searchTerm, users]);
+    if (searchTerm === "") {
+      setFilteredUsers(users);
+    } else {
+      const filtered = users.filter((user) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setFilteredUsers(filtered);
+    }
+  }, [searchTerm, users]);
+
   // Modal handlers (already complete)
   function handleUserClick(user) {
     setSelectedUser(user);
