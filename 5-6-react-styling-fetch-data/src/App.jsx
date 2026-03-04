@@ -232,15 +232,25 @@ export default function App() {
      Dependency array MUST be: [searchTerm, users]
      ========================================================= */
   useEffect(() => {
-    if (searchTerm.trim() === "") {
-      setFilteredUsers(users);
-    } else {
-      const filtered = users.filter((user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-      setFilteredUsers(filtered);
-    }
-  }, [searchTerm, users]);
+  if (searchTerm === "") {
+    setFilteredUsers(users);
+  } else {
+    const filtered = users.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  }
+}, [searchTerm, users]);
+useEffect(() => {
+  if (searchTerm === "") {
+    setFilteredUsers(users);
+  } else {
+    const filtered = users.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+    setFilteredUsers(filtered);
+  }
+}, [searchTerm, users]);
   // Modal handlers (already complete)
   function handleUserClick(user) {
     setSelectedUser(user);
